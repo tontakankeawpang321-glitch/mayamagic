@@ -410,8 +410,16 @@
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
             
-            <div class="aspect-video bg-black relative w-full flex-shrink-0 mt-14 md:mt-0">
-                <div id="player-container" class="w-full h-full"></div>
+            <div class="aspect-video bg-black relative w-full flex-shrink-0 mt-14 md:mt-0 group/player">
+                <div id="player-container" class="w-full h-full relative z-0"></div>
+                
+                <!-- Slide Buttons -->
+                <button onclick="playPrev()" class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-purple-600 backdrop-blur-sm text-white p-2 md:p-3 rounded-full transition-all z-10 border border-white/20 shadow-lg">
+                    <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                </button>
+                <button onclick="playNext()" class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-purple-600 backdrop-blur-sm text-white p-2 md:p-3 rounded-full transition-all z-10 border border-white/20 shadow-lg">
+                    <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                </button>
             </div>
             
             <div class="p-6 md:p-10 text-center relative overflow-y-auto bg-slate-50 flex-grow">
@@ -423,6 +431,16 @@
                         <i data-lucide="heart" class="w-5 h-5"></i>
                         <span>จดบันทึก ep นี้</span>
                     </button>
+
+                    <!-- Info Texts -->
+                    <div class="flex flex-col items-center gap-2 mt-2">
+                        <span class="text-[11px] text-slate-600 font-medium flex items-center gap-1.5 bg-slate-200/60 px-3 py-1 rounded-full">
+                            <i data-lucide="play-circle" class="w-4 h-4 text-purple-600"></i> เล่นอัตโนมัติเมื่อเล่นจบ
+                        </span>
+                        <span class="text-[10px] text-slate-400 uppercase tracking-widest flex items-center gap-1 mt-1 font-bold">
+                            Credit by <i data-lucide="youtube" class="w-3.5 h-3.5 text-[#FF0000]"></i> YouTube
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -826,6 +844,11 @@
         function playNext() {
             if (currentIndex < currentPlaylist.length - 1) playVideo(currentIndex + 1);
             else playVideo(0);
+        }
+
+        function playPrev() {
+            if (currentIndex > 0) playVideo(currentIndex - 1);
+            else playVideo(currentPlaylist.length - 1);
         }
 
         function closeModal() {
